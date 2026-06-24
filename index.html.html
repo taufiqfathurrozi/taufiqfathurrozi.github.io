@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMAN 5 Merangin – Unggul, Berkarakter, Berprestasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B2A4A;
+      --navy-d: #111C30;
+      --gold:   #D4A843;
+      --gold-l: #F0C96A;
+      --white:  #FAFAFA;
+      --gray:   #EEF2F7;
+      --text:   #2D3748;
+      --muted:  #718096;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(27, 42, 74, 0.95);
+      backdrop-filter: blur(8px);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.25); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo .emblem {
+      width: 38px; height: 38px;
+      background: var(--gold);
+      border-radius: 50%;
+      object-fit: cover;      
+      padding: 0;             
+      overflow: hidden;  
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 900;
+      color: var(--navy);
+    }
+    .nav-logo span {
+      color: var(--white);
+      font-weight: 600; font-size: 15px;
+      letter-spacing: .5px;
+    }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-l); }
+
+    .nav-cta {
+      padding: 8px 20px;
+      background: var(--gold);
+      color: var(--navy-d) !important;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      color: var(--navy-d) !important;
+    }
+    .nav-cta:hover { background: var(--gold-l) !important; color: var(--navy-d) !important; }
+
+    .burger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+    }
+    .burger span {
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy-d) 0%, var(--navy) 60%, #1e3a6e 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+
+    /* dekorasi lingkaran latar */
+    #hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      border: 60px solid rgba(212,168,67,.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      border: 40px solid rgba(212,168,67,.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      max-width: 800px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+      position: relative;
+    }
+    .hero-title em::after {
+      content: '';
+      position: absolute; left: 0; bottom: -4px; right: 0;
+      height: 3px; background: var(--gold);
+      border-radius: 2px;
+      transform: scaleX(0); transform-origin: left;
+      animation: underline-in .6s .8s ease forwards;
+    }
+    @keyframes underline-in { to { transform: scaleX(1); } }
+
+    .hero-sub {
+      margin-top: 20px;
+      color: rgba(255,255,255,.65);
+      font-size: 16px; max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      justify-content: center; margin-top: 36px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      border: none; transition: all .2s;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--navy-d);
+    }
+    .btn-primary:hover { background: var(--gold-l); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* Stats Counter */
+    .hero-stats {
+      display: flex; gap: 48px; flex-wrap: wrap;
+      justify-content: center; margin-top: 64px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem; font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px; color: rgba(255,255,255,.55);
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 88px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .section-title span { color: var(--gold); }
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--gold); border-radius: 2px;
+      margin: 16px 0 28px;
+    }
+
+    /* ── PROFIL ── */
+    #profil { background: var(--white); }
+    .profil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .profil-text p {
+      color: var(--muted); line-height: 1.8; margin-bottom: 14px;
+      font-size: 15px;
+    }
+    .visi-misi { margin-top: 28px; }
+    .visi-misi h4 {
+      font-size: 13px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 8px;
+    }
+    .visi-misi ul {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+    .visi-misi ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--muted); line-height: 1.6;
+    }
+    .visi-misi ul li::before {
+      content: '✦';
+      color: var(--gold); font-size: 10px; margin-top: 4px; flex-shrink: 0;
+    }
+    .profil-image-box {
+      background: var(--gray);
+      border-radius: 16px;
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .profil-image-box .school-icon {
+      font-size: 6rem; opacity: .15;
+    }
+    .profil-badges {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .badge {
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 12px; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px;
+    }
+
+    /* ── PROGRAM ── */
+    #program { background: var(--gray); }
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px; margin-top: 12px;
+    }
+    .program-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1.5px solid transparent;
+      transition: all .25s; cursor: default;
+    }
+    .program-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(27,42,74,.1);
+    }
+    .card-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--navy) 0%, #274270 100%);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 18px;
+    }
+    .program-card h3 {
+      font-size: 17px; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .program-card p {
+      font-size: 14px; color: var(--muted); line-height: 1.65;
+    }
+
+    /* ── PENGUMUMAN ── */
+    #pengumuman { background: var(--white); }
+    .pengumuman-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+    }
+
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item {
+      display: flex; gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid #E8EDF4;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .news-item:first-child { border-top: 1px solid #E8EDF4; }
+    .news-item:hover .news-title { color: var(--gold); }
+    .news-date-block {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      flex-shrink: 0; width: 48px;
+    }
+    .news-day {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 900;
+      color: var(--navy); line-height: 1;
+    }
+    .news-mon {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .news-content { flex: 1; }
+    .news-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--white);
+      background: var(--navy);
+      padding: 2px 8px; border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .news-title {
+      font-size: 15px; font-weight: 600;
+      color: var(--text); line-height: 1.4;
+      transition: color .2s;
+    }
+    .news-excerpt {
+      font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.55;
+    }
+
+    /* Sidebar kalender mini */
+    .sidebar-card {
+      background: var(--gray); border-radius: 14px; padding: 26px;
+      margin-bottom: 20px;
+    }
+    .sidebar-card h4 {
+      font-size: 13px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .event-list { display: flex; flex-direction: column; gap: 12px; }
+    .event-item {
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .event-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold); margin-top: 5px; flex-shrink: 0;
+    }
+    .event-item p { font-size: 13px; color: var(--text); line-height: 1.5; }
+    .event-item span { font-size: 12px; color: var(--muted); }
+
+    /* ── GALERI ── */
+    #galeri { background: var(--navy-d); }
+    #galeri .section-title { color: var(--white); }
+    .galeri-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px; margin-top: 16px;
+    }
+    .galeri-item {
+      background: rgba(255,255,255,.06);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .galeri-item:first-child {
+      grid-row: span 2; aspect-ratio: auto;
+    }
+    .galeri-item .placeholder {
+      font-size: 3rem; opacity: .2;
+    }
+    .galeri-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(27,42,74,.8) 0%, transparent 50%);
+      opacity: 0; transition: opacity .25s;
+      display: flex; align-items: flex-end; padding: 16px;
+    }
+    .galeri-item:hover .galeri-overlay { opacity: 1; }
+    .galeri-overlay p {
+      color: var(--white); font-size: 13px; font-weight: 500;
+    }
+
+    /* ── KONTAK ── */
+    #kontak { background: var(--gray); }
+    .kontak-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .contact-row div p:first-child {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 3px;
+    }
+    .contact-row div p:last-child {
+      font-size: 15px; color: var(--navy); font-weight: 500;
+    }
+
+    /* Form */
+    .kontak-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 13px; font-weight: 600;
+      color: var(--navy); letter-spacing: .5px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 16px;
+      border: 1.5px solid #D1D9E6;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; color: var(--text);
+      background: var(--white);
+      outline: none;
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--navy);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-success {
+      display: none;
+      background: #d4edda; color: #155724;
+      padding: 14px 18px; border-radius: 8px;
+      font-size: 14px; font-weight: 500;
+      border: 1px solid #c3e6cb;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-d);
+      padding: 40px 5% 24px;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 32px; flex-wrap: wrap;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand p {
+      color: rgba(255,255,255,.45); font-size: 13px;
+      margin-top: 8px; max-width: 260px; line-height: 1.6;
+    }
+    .footer-links h5 {
+      color: var(--white); font-size: 13px; font-weight: 600;
+      margin-bottom: 12px; letter-spacing: .5px;
+    }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links ul a {
+      color: rgba(255,255,255,.45); font-size: 13px;
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-links ul a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 20px; flex-wrap: wrap; gap: 8px;
+    }
+    .footer-bottom p { color: rgba(255,255,255,.3); font-size: 12px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.06);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.5); font-size: 16px;
+      text-decoration: none; transition: all .2s;
+    }
+    .social-links a:hover { background: var(--gold); color: var(--navy-d); }
+
+    /* ── BACK TO TOP ── */
+    #back-to-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 44px; height: 44px;
+      background: var(--gold); color: var(--navy-d);
+      border-radius: 10px; border: none;
+      font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      opacity: 0; transform: translateY(10px);
+      transition: all .3s; pointer-events: none;
+    }
+    #back-to-top.visible { opacity: 1; transform: none; pointer-events: all; }
+    #back-to-top:hover { transform: translateY(-3px); }
+
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: var(--navy-d);
+      padding: 20px 5% 28px;
+      z-index: 99;
+      flex-direction: column; gap: 14px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,.8); text-decoration: none;
+      font-size: 15px; font-weight: 500;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .profil-grid,
+      .pengumuman-layout,
+      .kontak-grid { grid-template-columns: 1fr; }
+      .galeri-grid { grid-template-columns: 1fr 1fr; }
+      .galeri-item:first-child { grid-row: span 1; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+      section { padding: 64px 5%; }
+    }
+    @media (max-width: 480px) {
+      .galeri-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="logosekolah.png.png" style="width:38px; height:38px; border-radius:50%; object-fit:cover;" />
+    <span>SMAN 5 Merangin</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#pengumuman">Pengumuman</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#kontak" class="nav-cta">Hubungi Kami</a></li>
+  </ul>
+  <div class="burger" id="burger" aria-label="Buka menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#profil" onclick="closeMobile()">Profil</a>
+  <a href="#program" onclick="closeMobile()">Program</a>
+  <a href="#pengumuman" onclick="closeMobile()">Pengumuman</a>
+  <a href="#galeri" onclick="closeMobile()">Galeri</a>
+  <a href="#kontak" onclick="closeMobile()">Hubungi Kami</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Kabupaten Merangin, Jambi</p>
+  <h1 class="hero-title">
+    Mendidik Generasi<br><em>Unggul & Berkarakter</em>
+  </h1>
+  <p class="hero-sub">
+    SMAN 5 Merangin berkomitmen menghadirkan pendidikan berkualitas yang membentuk
+    siswa cerdas, berakhlak mulia, dan siap menghadapi tantangan global.
+  </p>
+  <div class="hero-btns">
+    <a href="#program" class="btn btn-primary">Lihat Program →</a>
+    <a href="#pengumuman" class="btn btn-outline">Pengumuman Terbaru</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num" data-target="800">0</div>
+      <div class="stat-label">Total Siswa</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="58">0</div>
+      <div class="stat-label">Tenaga Pendidik</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="12">0</div>
+      <div class="stat-label">Ekskul Aktif</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="30">0</div>
+      <div class="stat-label">Prestasi Tahun Ini</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <div class="section-inner profil-grid">
+    <div class="profil-text">
+      <p class="section-eyebrow">Tentang Kami</p>
+      <h2 class="section-title">Mengenal <span>SMAN 5 Merangin</span></h2>
+      <div class="divider"></div>
+      <p>
+        SMAN 5 Merangin adalah satuan pendidikan menengah atas negeri di Kabupaten Merangin,
+        Provinsi Jambi. Berdiri dengan semangat mencerdaskan kehidupan bangsa, sekolah kami
+        terus berkembang menjadi lembaga pendidikan yang modern dan berkarakter.
+      </p>
+      <p>
+        Dengan dukungan tenaga pendidik berpengalaman dan fasilitas yang memadai, kami
+        mendorong setiap siswa untuk mencapai potensi terbaiknya — baik di bidang akademik
+        maupun non-akademik.
+      </p>
+
+      <div class="visi-misi">
+        <h4>Visi</h4>
+        <ul>
+          <li>Terwujudnya lulusan yang cerdas, beriman, berakhlak mulia, dan berdaya saing global.</li>
+        </ul>
+        <h4 style="margin-top:16px">Misi</h4>
+        <ul>
+          <li>Mengembangkan pembelajaran yang aktif, inovatif, dan berbasis teknologi.</li>
+          <li>Menanamkan nilai karakter dan budaya bangsa dalam setiap kegiatan sekolah.</li>
+          <li>Mendorong siswa berprestasi di tingkat daerah, nasional, dan internasional.</li>
+          <li>Membangun ekosistem sekolah yang inklusif dan berwawasan lingkungan.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="profil-image-box">
+        <div class="school-icon">🏫</div>
+        <div class="profil-badges">
+          <span class="badge">Akreditasi A</span>
+          <span class="badge">Kurikulum Merdeka</span>
+          <span class="badge">Sekolah Adiwiyata</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="section-inner">
+    <p class="section-eyebrow">Keunggulan Kami</p>
+    <h2 class="section-title">Program <span>Unggulan</span></h2>
+    <div class="divider"></div>
+
+    <div class="program-grid">
+      <div class="program-card">
+        <div class="card-icon">📚</div>
+        <h3>Kelas MIPA & IPS</h3>
+        <p>Program penjurusan dengan kurikulum Merdeka Belajar yang adaptif, mendorong siswa berpikir kritis dan kreatif.</p>
+      </div>
+      <div class="program-card">
+        <div class="card-icon">🏆</div>
+        <h3>Persiapan Olimpiade</h3>
+        <p>Pembinaan intensif OSN di bidang Matematika, Fisika, Kimia, Biologi, Kebumian, Informatika, dan Astronomi.</p>
+      </div>
+      <div class="program-card">
+        <div class="card-icon">💻</div>
+        <h3>Literasi Digital</h3>
+        <p>Program informatika dan coding terintegrasi dalam kurikulum, mempersiapkan siswa menghadapi era digital.</p>
+      </div>
+      <div class="program-card">
+        <div class="card-icon">🌱</div>
+        <h3>Sekolah Adiwiyata</h3>
+        <p>Program lingkungan hidup yang menumbuhkan kesadaran ekologi dan kecintaan terhadap alam sejak dini.</p>
+      </div>
+      <div class="program-card">
+        <div class="card-icon">🎨</div>
+        <h3>Seni & Budaya</h3>
+        <p>Ekstrakurikuler seni tari, musik, dan teater yang melestarikan budaya lokal Merangin dan Jambi.</p>
+      </div>
+      <div class="program-card">
+        <div class="card-icon">⚽</div>
+        <h3>Olahraga Prestasi</h3>
+        <p>Pembinaan atlet sekolah di cabang olahraga unggulan menuju kejuaraan daerah dan nasional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENGUMUMAN -->
+<section id="pengumuman">
+  <div class="section-inner">
+    <p class="section-eyebrow">Informasi Terkini</p>
+    <h2 class="section-title">Berita & <span>Pengumuman</span></h2>
+    <div class="divider"></div>
+
+    <div class="pengumuman-layout">
+      <div class="news-list" id="newsList">
+        <!-- diisi JS -->
+      </div>
+
+      <div>
+        <div class="sidebar-card">
+          <h4>Agenda Mendatang</h4>
+          <div class="event-list">
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div>
+                <p>Ujian Sumatif Akhir Semester</p>
+                <span>7 – 14 Juli 2026</span>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div>
+                <p>Pembagian Rapor Semester Genap</p>
+                <span>19 Juli 2026</span>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div>
+                <p>Masa Pengenalan Lingkungan Sekolah (MPLS)</p>
+                <span>14 – 16 Juli 2026</span>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div>
+                <p>Seleksi OSN Tingkat Sekolah</p>
+                <span>Agustus 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Tautan Cepat</h4>
+          <div class="event-list">
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div><p>Portal E-Rapor Siswa</p></div>
+            </div>
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div><p>Jadwal Pelajaran Online</p></div>
+            </div>
+            <div class="event-item">
+              <div class="event-dot"></div>
+              <div><p>Pendaftaran PPDB 2026</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section id="galeri">
+  <div class="section-inner">
+    <p class="section-eyebrow" style="color:rgba(255,255,255,.5)">Dokumentasi Kegiatan</p>
+    <h2 class="section-title">Galeri <span>Sekolah</span></h2>
+    <div class="divider"></div>
+
+    <div class="galeri-grid">
+      <div class="galeri-item" style="background:rgba(212,168,67,.08)">
+        <span class="placeholder">🎓</span>
+        <div class="galeri-overlay"><p>Wisuda & Perpisahan 2026</p></div>
+      </div>
+      <div class="galeri-item">
+        <span class="placeholder">🏆</span>
+        <div class="galeri-overlay"><p>Kejuaraan OSN Kabupaten</p></div>
+      </div>
+      <div class="galeri-item">
+        <span class="placeholder">⚽</span>
+        <div class="galeri-overlay"><p>Turnamen Olahraga Antarkelas</p></div>
+      </div>
+      <div class="galeri-item">
+        <span class="placeholder">🎨</span>
+        <div class="galeri-overlay"><p>Pameran Karya Seni Siswa</p></div>
+      </div>
+      <div class="galeri-item">
+        <span class="placeholder">🌿</span>
+        <div class="galeri-overlay"><p>Kegiatan Adiwiyata Sekolah</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="section-inner">
+    <p class="section-eyebrow">Hubungi Kami</p>
+    <h2 class="section-title">Informasi <span>Kontak</span></h2>
+    <div class="divider"></div>
+
+    <div class="kontak-grid">
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div>
+            <p>Alamat</p>
+            <p>Jl. Pancasila No. 1, Kabupaten Merangin, Jambi 37352</p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📞</div>
+          <div>
+            <p>Telepon</p>
+            <p>0822 7962 0024</p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <p>Email</p>
+            <p>sman5merangin@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <p>Jam Operasional</p>
+            <p>Senin–Jumat, 07.00 – 15.00 WIB</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="kontak-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+              <input type="text" id="nama" placeholder="Nama Anda" />
+            </div>
+            <div class="form-group">
+              <label>Kategori</label>
+              <select id="kategori">
+                <option value="">— Pilih —</option>
+                <option>Informasi PPDB</option>
+                <option>Prestasi & Ekstrakurikuler</option>
+                <option>Administrasi Sekolah</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email / WhatsApp</label>
+            <input type="text" id="kontak-input" placeholder="email atau nomor WA" />
+          </div>
+          <div class="form-group">
+            <label>Pesan</label>
+            <textarea id="pesan" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea>
+          </div>
+          <div class="form-success" id="formSuccess">
+            ✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.
+          </div>
+          <button class="btn btn-primary" onclick="kirimPesan()" style="width:100%;justify-content:center">
+            Kirim Pesan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo" style="margin-bottom:6px;display:inline-flex">
+        <div class="emblem">5</div>
+        <span>SMAN 5 Merangin</span>
+      </a>
+      <p>Unggul, Berkarakter, Berprestasi. Mendidik generasi penerus bangsa sejak berdiri.</p>
+    </div>
+    <div class="footer-links">
+      <h5>Navigasi</h5>
+      <ul>
+        <li><a href="#profil">Profil Sekolah</a></li>
+        <li><a href="#program">Program Unggulan</a></li>
+        <li><a href="#pengumuman">Pengumuman</a></li>
+        <li><a href="#galeri">Galeri Kegiatan</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h5>Layanan</h5>
+      <ul>
+        <li><a href="#kontak">PPDB Online</a></li>
+        <li><a href="#kontak">E-Rapor</a></li>
+        <li><a href="#kontak">Beasiswa</a></li>
+        <li><a href="#kontak">Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 SMAN 5 Merangin. Hak cipta dilindungi.</p>
+    <div class="social-links">
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="Instagram">📸</a>
+      <a href="#" title="WhatsApp">💬</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">↑</button>
+
+<script>
+  /* ── DATA BERITA ── */
+  const berita = [
+    {
+      hari: "20", bulan: "Jun",
+      tag: "Prestasi",
+      judul: "Siswa SMAN 5 Merangin Raih Medali Perunggu OSN Kebumian Tingkat Provinsi",
+      excerpt: "Tim olimpiade kebumian sekolah kami berhasil meraih medali perunggu pada seleksi tingkat provinsi yang diselenggarakan di Jambi.",
+    },
+    {
+      hari: "15", bulan: "Jun",
+      tag: "Pengumuman",
+      judul: "Pengumuman Jadwal Ujian Sumatif Akhir Semester Genap 2025/2026",
+      excerpt: "Ujian akan dilaksanakan mulai tanggal 7 Juli 2026. Seluruh siswa diharapkan mempersiapkan diri dengan baik.",
+    },
+    {
+      hari: "08", bulan: "Jun",
+      tag: "Kegiatan",
+      judul: "SMAN 5 Merangin Gelar Pekan Olahraga dan Seni Antarkelas 2026",
+      excerpt: "Rangkaian kegiatan POR & Seni berlangsung meriah selama 3 hari dengan diikuti oleh seluruh kelas X, XI, dan XII.",
+    },
+    {
+      hari: "01", bulan: "Jun",
+      tag: "PPDB",
+      judul: "Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027 Dibuka",
+      excerpt: "Pendaftaran PPDB jalur zonasi dan prestasi telah resmi dibuka. Kuota tersedia 320 siswa untuk 8 rombel baru.",
+    },
+  ];
+
+  function renderBerita() {
+    const container = document.getElementById('newsList');
+    container.innerHTML = berita.map(b => `
+      <div class="news-item">
+        <div class="news-date-block">
+          <div class="news-day">${b.hari}</div>
+          <div class="news-mon">${b.bulan}</div>
+        </div>
+        <div class="news-content">
+          <span class="news-tag">${b.tag}</span>
+          <div class="news-title">${b.judul}</div>
+          <div class="news-excerpt">${b.excerpt}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* ── COUNTER ANIMASI ── */
+  function animateCounters() {
+    const items = document.querySelectorAll('.stat-num[data-target]');
+    const duration = 1800;
+
+    items.forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + (target >= 100 ? '+' : '');
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  let counterDone = false;
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counterDone) {
+      counterDone = true;
+      animateCounters();
+    }
+  }, { threshold: .3 });
+  heroObs.observe(document.getElementById('hero'));
+
+  /* ── SCROLL NAV ── */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+
+    const btn = document.getElementById('back-to-top');
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  /* ── BURGER MENU ── */
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  /* ── FORM KIRIM ── */
+  function kirimPesan() {
+    const nama = document.getElementById('nama').value.trim();
+    const pesan = document.getElementById('pesan').value.trim();
+    const kategori = document.getElementById('kategori').value;
+
+    if (!nama || !pesan || !kategori) {
+      alert('Harap lengkapi nama, kategori, dan pesan terlebih dahulu.');
+      return;
+    }
+
+    // Simulasi pengiriman
+    const btn = document.querySelector('#kontak .btn-primary');
+    const originalText = btn.textContent;
+    btn.textContent = 'Mengirim...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('formSuccess').style.display = 'block';
+      btn.textContent = originalText;
+      btn.disabled = false;
+      document.getElementById('nama').value = '';
+      document.getElementById('pesan').value = '';
+      document.getElementById('kontak-input').value = '';
+      document.getElementById('kategori').value = '';
+    }, 1200);
+  }
+
+  /* ── INIT ── */
+  renderBerita();
+</script>
+</body>
+</html>
